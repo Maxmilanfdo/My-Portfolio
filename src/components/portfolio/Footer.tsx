@@ -6,12 +6,9 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-brand-secondary via-brand to-brand-accent text-sm font-bold">
-                A
-              </span>
+            <a href="#home" className="inline-block">
               <span className="font-display text-sm font-semibold">alex.rivera</span>
-            </div>
+            </a>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
               Building considered digital products at the intersection of
               engineering and design.

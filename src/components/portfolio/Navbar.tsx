@@ -43,11 +43,8 @@ export function Navbar() {
         }`}
       >
         <nav className="glass-strong flex items-center justify-between rounded-full px-3 py-2 shadow-[0_10px_40px_-10px_rgba(108,99,255,0.35)]">
-          <a href="#home" className="flex items-center gap-2 pl-3">
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-brand-secondary via-brand to-brand-accent text-sm font-bold">
-              A
-            </span>
-            <span className="hidden font-display text-sm font-semibold tracking-tight sm:block">
+          <a href="#home" className="pl-3">
+            <span className="font-display text-sm font-semibold tracking-tight">
               alex.rivera
             </span>
           </a>

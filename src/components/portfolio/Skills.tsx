@@ -4,7 +4,7 @@ import { SectionHeader } from "./SectionHeader";
 
 export function Skills() {
   return (
-    <section id="skills" className="relative py-32">
+    <section id="skills" className="relative py-20">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Skills"

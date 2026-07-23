@@ -6,7 +6,7 @@ import { MagneticButton } from "./MagneticButton";
 
 export function Resume() {
   return (
-    <section id="resume" className="relative py-32">
+    <section id="resume" className="relative py-20">
       <div className="mx-auto max-w-4xl px-6">
         <SectionHeader
           eyebrow="Resume"

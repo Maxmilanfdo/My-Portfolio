@@ -16,7 +16,7 @@ export function Projects() {
   const items = active === "all" ? projects : projects.filter((p) => p.category === active);
 
   return (
-    <section id="projects" className="relative py-32">
+    <section id="projects" className="relative py-20">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Selected Work"

@@ -29,7 +29,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
 export function About() {
   return (
-    <section id="about" className="relative py-32">
+    <section id="about" className="relative py-20">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="About"

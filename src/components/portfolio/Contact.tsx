@@ -30,7 +30,7 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="relative py-32">
+    <section id="contact" className="relative py-20">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Contact"
