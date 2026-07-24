@@ -171,34 +171,216 @@ export const designGallery: GalleryItem[] = [
 ];
 
 export type VideoShowcaseItem = {
-  title: string;
   href: string;
   platform: "youtube" | "instagram";
-  description: string;
-  thumbnail: string;
 };
 
+export function getVideoThumbnail(href: string, platform: VideoShowcaseItem["platform"]) {
+  if (platform === "youtube") {
+    const youtubeId = href.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([^&/?]+)/)?.[1];
+    return youtubeId ? `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg` : "";
+  }
+
+  const instagramSlug = href.match(/instagram\.com\/(?:p|reel|tv)\/([^/?]+)/)?.[1];
+  return instagramSlug ? `https://www.instagram.com/p/${instagramSlug}/media/?size=l` : "";
+}
+
 export const videoShowcase: VideoShowcaseItem[] = [
+  
+  // RS Caterers Videos
+  
   {
-    title: "Motion Reel 2025",
-    href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    platform: "youtube",
-    description: "A selection of recent motion edits and product video work.",
-    thumbnail: project2,
+    href: "https://www.instagram.com/reel/DbDhUjsgaIZ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //33
   },
   {
-    title: "Brand Edit for Instagram",
-    href: "https://www.instagram.com/p/CxExample/",
-    platform: "instagram",
-    description: "A short-form Instagram edit showcasing storytelling and pacing.",
-    thumbnail: project4,
+    href: "https://www.instagram.com/reel/Da8kLG5lTEB/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //32
   },
   {
-    title: "Promo Cut",
-    href: "https://www.youtube.com/watch?v=oHg5SJYRHA0",
+    href: "https://www.instagram.com/reel/Da2pRwZFIg3/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //31
+  },
+  {
+    href: "https://www.instagram.com/reel/DaXiBmggHmM/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //30
+  },
+  {
+    href: "https://www.instagram.com/reel/DaITJeSirKL/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //29
+  },
+  {
+    href: "https://www.instagram.com/reel/DaAoFiQj5F3/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //28
+  },
+  {
+    href: "https://www.instagram.com/reel/DZ42TODlFfS/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //27
+  },
+  {
+    href: "https://www.instagram.com/reel/DZrOLOnD-84/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //26
+  },
+  {
+    href: "https://www.instagram.com/reel/DY3sltdvqRe/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //25
+  },
+  
+  {
+    href: "https://youtu.be/rhXW4eMVm6g?si=b79dQRScvCScWYGG",
     platform: "youtube",
-    description: "A polished promotional cut for social distribution.",
-    thumbnail: project1,
+  },
+
+  {
+    href: "https://www.instagram.com/reel/DYtUMu4DO54/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //24
+  },
+  {
+    href: "https://www.instagram.com/reel/DYJRGViAiFM/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //23
+  },
+  {
+    href: "https://www.instagram.com/reel/DXwYKqTDdju/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //22
+  },
+  {
+    href: "https://www.instagram.com/reel/DW1Udf7D17E/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //21
+  },
+  {
+    href: "https://www.instagram.com/reel/DWl9Gm_E41M/",
+    platform: "instagram", //20
+  },
+  {
+    href: "https://www.instagram.com/reel/DWbkcSEAR-D/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //19
+  },
+  {
+    href: "https://www.instagram.com/reel/DWWakgCjevk/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //18
+  },
+
+  {
+    href: "https://youtube.com/shorts/gQZI_zkNuLQ?si=UcMC9DYsxLGRI7kU",
+    platform: "youtube",
+  },
+
+  {
+    href: "https://www.instagram.com/reel/DV0jrswj4Zm/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //17
+  },
+
+  {
+    href: "https://youtu.be/tYAE5cdQtDM?si=RriZpqHh8JbE7Jer",
+    platform: "youtube",
+  },
+
+  {
+    href: "https://www.instagram.com/reel/DVtN86lDKqW/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //16
+  },
+  {
+    href: "https://www.instagram.com/reel/DVjBl12Ds10/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //15
+  },
+  {
+    href: "https://www.instagram.com/reel/DVLvmOujdDC/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //14
+  },
+
+  {
+    href: "https://youtu.be/Lqgp35wga4k?si=C6xSBEOKDMnlcV7c",
+    platform: "youtube",
+  },
+
+  {
+    href: "https://www.instagram.com/reel/DU8KKh4jeGk/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //13
+  },
+  {
+    href: "https://www.instagram.com/reel/DUlHnUDjdHt/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //12
+  },
+  {
+    href: "https://www.instagram.com/reel/DUDiW4DDKDU/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //11
+  },
+  {
+    href: "https://www.instagram.com/reel/DT6vnw9FhRo/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //10
+  },
+  {
+    href: "https://www.instagram.com/reel/DTQJWCvlvho/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //9
+  },
+  {
+    href: "https://www.instagram.com/reel/DTK_vdKjQ2P/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //8
+  },
+
+  {
+    href: "https://youtu.be/Qx494RpS1fo?si=KMCff_wVZwdinAbJ",
+    platform: "youtube",
+  },
+  
+  {
+    href: "https://www.instagram.com/reel/DShzBxEAca_/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //7
+  },
+  {
+    href: "https://www.instagram.com/reel/DSKn69fDbzg/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //6
+  },
+  {
+    href: "https://www.instagram.com/reel/DSFeUycDSvJ/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //5
+  },
+  {
+    href: "https://youtu.be/P-y4DFuYLdM?si=_rOXEfRmc_Z6dOJ0",
+    platform: "youtube",
+  },
+
+  {
+    href: "https://www.instagram.com/reel/DRSFUj4jTVz/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //4
+  },
+  {
+    href: "https://www.instagram.com/reel/DQ9fFGSk-US/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //3
+  },
+  {
+    href: "https://www.instagram.com/reel/DQOhc-6E88A/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //2
+  },
+  {
+    href: "https://www.instagram.com/reel/DQBdhcgiJz0/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram", //1
+  },
+
+// Personal Projects Videos
+  {
+    href: "https://youtu.be/sGQAbpP4TTU?si=bIbA9qgt9Cam9iv0",
+    platform: "youtube",
+  },
+  {
+    href: "https://youtu.be/H0r-3wuJsmo?si=kRByytIJgMpq5H-o",
+    platform: "youtube",
+  },
+  {
+    href: "https://youtu.be/yc2exvUJYkg?si=64Mc6KDoCKB3T3QG",
+    platform: "youtube",
+  }, 
+  {
+    href: "https://youtu.be/zrfo6nLLucc?si=_sEFdcUehBFPeJVO",
+    platform: "youtube",
+  },
+  {
+    href: "https://youtu.be/Howc-ZqRRSU?si=gnCrIBSuR1Q4CmuB",
+    platform: "youtube",
+  },
+  {
+    href: "https://youtu.be/Wb_HRseCIh0?si=nykZ1ZVXlXkwqga-",
+    platform: "youtube",
   },
 ];
 

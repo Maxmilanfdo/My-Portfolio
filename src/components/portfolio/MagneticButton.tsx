@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { useRef, type ButtonHTMLAttributes, type ReactNode } from "react";
+import { useRef, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ReactNode } from "react";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;
   variant?: "primary" | "ghost";
   as?: "button" | "a";
@@ -41,7 +41,7 @@ export function MagneticButton({ children, variant = "primary", as = "button", h
 
   if (as === "a") {
     return (
-      <a href={href} className="inline-block">
+      <a href={href} className="inline-block" {...rest}>
         {inner}
       </a>
     );

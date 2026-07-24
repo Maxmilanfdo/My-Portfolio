@@ -1,8 +1,9 @@
 import { AnimatePresence, motion, useAnimationFrame } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Github, Youtube, Instagram } from "lucide-react";
-import { projects, designGallery, videoShowcase, type ProjectCategory } from "@/constants/portfolio";
+import { projects, designGallery, videoShowcase, getVideoThumbnail, type ProjectCategory } from "@/constants/portfolio";
 import { SectionHeader } from "./SectionHeader";
+import projectFallback from "@/assets/project-4.jpg";
 
 const tabs: { id: ProjectCategory; label: string }[] = [
   { id: "software", label: "Software" },
@@ -14,10 +15,68 @@ export function Projects() {
   const [active, setActive] = useState<(typeof tabs)[number]["id"]>("software");
   const [paused, setPaused] = useState(false);
   const [speed, setSpeed] = useState(80);
+  const [videoMetadata, setVideoMetadata] = useState<Record<string, { title: string; caption: string; thumbnail: string }>>({});
   const x = useRef(0);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const items = active === "software" ? projects : [];
   const duplicatedGallery = [...designGallery, ...designGallery];
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadVideoMetadata = async () => {
+      const results = await Promise.all(
+        videoShowcase.map(async (item) => {
+          try {
+            if (item.platform === "youtube") {
+              const response = await fetch(`https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(item.href)}`);
+              if (response.ok) {
+                const data = await response.json();
+                return {
+                  key: item.href,
+                  title: data.title || "YouTube video",
+                  caption: data.title || "YouTube video",
+                  thumbnail: getVideoThumbnail(item.href, item.platform),
+                };
+              }
+            }
+
+            const response = await fetch(`/__api/instagram-metadata?url=${encodeURIComponent(item.href)}`);
+            if (response.ok) {
+              const data = await response.json();
+              return {
+                key: item.href,
+                title: data.title || "Instagram reel",
+                caption: data.title || "Instagram reel",
+                thumbnail: data.thumbnail || getVideoThumbnail(item.href, item.platform),
+              };
+            }
+          } catch {
+            // Ignore metadata lookup failures and fall back to defaults.
+          }
+
+          return {
+            key: item.href,
+            title: item.platform === "youtube" ? "YouTube video" : "Instagram reel",
+            caption: item.platform === "youtube" ? "YouTube video" : "Instagram reel",
+            thumbnail: getVideoThumbnail(item.href, item.platform),
+          };
+        })
+      );
+
+      if (!isMounted) return;
+
+      setVideoMetadata(
+        Object.fromEntries(results.map((result) => [result.key, { title: result.title, caption: result.caption, thumbnail: result.thumbnail }]))
+      );
+    };
+
+    void loadVideoMetadata();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useAnimationFrame((_, delta) => {
     if (paused || !trackRef.current) return;
@@ -234,38 +293,51 @@ export function Projects() {
 
         {active === "video" && (
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {videoShowcase.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                className="glass-strong group overflow-hidden rounded-3xl transition hover:-translate-y-1"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img
-                    src={item.thumbnail}
-                    alt={item.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/60 px-3 py-2 text-white">
-                    {item.platform === "youtube" ? <Youtube size={16} /> : <Instagram size={16} />}
-                    <span className="text-xs uppercase tracking-[0.2em]">{item.platform}</span>
+            {videoShowcase.map((item) => {
+              const meta = videoMetadata[item.href] || {
+                title: item.platform === "youtube" ? "YouTube video" : "Instagram reel",
+                caption: item.platform === "youtube" ? "YouTube video" : "Instagram reel",
+                thumbnail: getVideoThumbnail(item.href, item.platform),
+              };
+              const label = item.platform === "youtube" ? meta.title : meta.caption || meta.title;
+
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glass-strong group overflow-hidden rounded-3xl transition hover:-translate-y-1"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={meta.thumbnail}
+                      alt={label}
+                      loading="lazy"
+                      onError={(event) => {
+                        event.currentTarget.src = projectFallback;
+                      }}
+                      className="h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-transparent" />
+                    <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/60 px-3 py-2 text-white">
+                      {item.platform === "youtube" ? <Youtube size={16} /> : <Instagram size={16} />}
+                      <span className="text-xs uppercase tracking-[0.2em]">{item.platform}</span>
+                    </div>
                   </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between gap-4">
-                    <h3 className="font-display text-xl font-semibold">{item.title}</h3>
-                    <div className="grid h-9 w-9 place-items-center rounded-full glass transition-transform group-hover:scale-110">
+                  <div className="flex items-start justify-between gap-4 p-6">
+                    <div className="min-w-0">
+                      <h3 className="font-display text-lg font-semibold leading-snug line-clamp-2">
+                        {label}
+                      </h3>
+                    </div>
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full glass transition-transform group-hover:scale-110">
                       <ArrowUpRight size={15} />
                     </div>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-                </div>
-              </a>
-            ))}
+                </a>
+              );
+            })}
           </div>
         )}
       </div>

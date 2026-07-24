@@ -15,7 +15,7 @@ export function Resume() {
         />
 
         <div className="mt-14 flex justify-center">
-          <MagneticButton as="a" href="#">
+          <MagneticButton as="a" href="/resume.pdf" download="resume.pdf" rel="noopener noreferrer">
             <Download size={16} /> Download resume (PDF)
           </MagneticButton>
         </div>
