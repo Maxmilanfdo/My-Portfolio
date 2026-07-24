@@ -48,7 +48,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 text-xs text-muted-foreground sm:flex-row">
-          <div>© {new Date().getFullYear()} Maxmilan Fernando.</div>
+          <div>© {new Date().getFullYear()} Designed by Maxmilan Fernando.</div>
           <div>Crafted with care.</div>
         </div>
       </div>

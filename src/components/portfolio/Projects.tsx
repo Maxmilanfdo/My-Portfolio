@@ -1,9 +1,9 @@
 import { AnimatePresence, motion, useAnimationFrame } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, ChevronLeft, ChevronRight, Github, Youtube, Instagram } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Github, Youtube, Instagram, X } from "lucide-react";
 import { projects, designGallery, videoShowcase, getVideoThumbnail, type ProjectCategory } from "@/constants/portfolio";
 import { SectionHeader } from "./SectionHeader";
-import projectFallback from "@/assets/project-4.jpg";
+import projectFallback from "@/assets/project-4.png";
 
 const tabs: { id: ProjectCategory; label: string }[] = [
   { id: "software", label: "Software" },
@@ -16,10 +16,40 @@ export function Projects() {
   const [paused, setPaused] = useState(false);
   const [speed, setSpeed] = useState(80);
   const [videoMetadata, setVideoMetadata] = useState<Record<string, { title: string; caption: string; thumbnail: string }>>({});
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxOpen]);
   const x = useRef(0);
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const trackWidthRef = useRef(0);
   const items = active === "software" ? projects : [];
-  const duplicatedGallery = [...designGallery, ...designGallery];
+  const duplicatedGallery = [...designGallery, ...designGallery, ...designGallery];
+
+  const getTrackWidth = () => (trackRef.current ? trackRef.current.scrollWidth / 3 : 0);
+  const normalizeX = (value: number) => {
+    const trackWidth = trackWidthRef.current || getTrackWidth();
+    if (!trackWidth) return value;
+    if (value < -trackWidth) return value + trackWidth;
+    if (value > 0) return value - trackWidth;
+    return value;
+  };
+
+  useEffect(() => {
+    if (active !== "design" || !trackRef.current) return;
+
+    const trackWidth = getTrackWidth();
+    trackWidthRef.current = trackWidth;
+    x.current = -trackWidth;
+    trackRef.current.style.transform = `translateX(${x.current}px)`;
+  }, [active]);
 
   useEffect(() => {
     let isMounted = true;
@@ -82,10 +112,13 @@ export function Projects() {
     if (paused || !trackRef.current) return;
 
     x.current -= (speed * delta) / 1000;
-    const trackWidth = trackRef.current.scrollWidth / 2;
+    const trackWidth = trackRef.current.scrollWidth / 3;
 
-    if (Math.abs(x.current) >= trackWidth) {
+    if (x.current <= -trackWidth) {
       x.current += trackWidth;
+    }
+    if (x.current > 0) {
+      x.current -= trackWidth;
     }
 
     trackRef.current.style.transform = `translateX(${x.current}px)`;
@@ -111,16 +144,13 @@ export function Projects() {
     const prevPaused = paused;
     setPaused(true);
 
-    // apply CSS transition
-    track.style.transition = `transform ${duration}ms cubic-bezier(.22,.9,.31,1)`;
+    const trackWidth = track.scrollWidth / 3;
+    const target = x.current + delta;
+    const shouldWrapRight = target > 0;
+    const shouldWrapLeft = target <= -trackWidth;
 
-    x.current += delta;
-    const trackWidth = track.scrollWidth / 2;
-    if (Math.abs(x.current) >= trackWidth) {
-      // wrap
-      x.current += x.current < 0 ? trackWidth : -trackWidth;
-    }
-    track.style.transform = `translateX(${x.current}px)`;
+    track.style.transition = `transform ${duration}ms cubic-bezier(.22,.9,.31,1)`;
+    track.style.transform = `translateX(${target}px)`;
 
     const cleanup = () => {
       track.style.transition = "";
@@ -129,15 +159,25 @@ export function Projects() {
     };
 
     const onEnd = () => {
+      if (shouldWrapRight) {
+        x.current = target - trackWidth;
+        track.style.transform = `translateX(${x.current}px)`;
+      } else if (shouldWrapLeft) {
+        x.current = target + trackWidth;
+        track.style.transform = `translateX(${x.current}px)`;
+      } else {
+        x.current = target;
+      }
       cleanup();
       track.removeEventListener("transitionend", onEnd);
     };
 
     track.addEventListener("transitionend", onEnd, { once: true });
 
-    // fallback in case transitionend doesn't fire
     setTimeout(() => {
-      if (isAnimatingRef.current) cleanup();
+      if (isAnimatingRef.current) {
+        onEnd();
+      }
     }, duration + 50);
   };
 
@@ -214,12 +254,11 @@ export function Projects() {
                         </p>
                       </div>
                       <div className="flex gap-2">
-                        <a href={p.demo} className="grid h-9 w-9 place-items-center rounded-full glass transition-transform hover:scale-110">
-                          <ArrowUpRight size={15} />
-                        </a>
-                        <a href={p.repo} className="grid h-9 w-9 place-items-center rounded-full glass transition-transform hover:scale-110">
-                          <Github size={14} />
-                        </a>
+                          {p.repo && (
+                          <a href={p.repo} className="grid h-9 w-9 place-items-center rounded-full glass transition-transform hover:scale-110">
+                            <Github size={14} />
+                          </a>
+                        )}
                       </div>
                     </div>
                     <div className="mt-5 flex flex-wrap gap-2">
@@ -236,18 +275,45 @@ export function Projects() {
           </motion.div>
         )}
 
+        {/* Lightbox modal for full-size image preview */}
+        {lightboxOpen && selectedImage && (
+          <div
+            className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-6"
+            onClick={() => setLightboxOpen(false)}
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="relative max-w-[90vw] max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
+              <button
+                aria-label="Close"
+                onClick={() => setLightboxOpen(false)}
+                className="absolute right-2 top-2 z-50 rounded-full bg-black/60 p-2 text-white hover:bg-black/70 cursor-pointer"
+              >
+                <X size={16} />
+              </button>
+              <img src={selectedImage} alt="Full size" className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl" />
+            </div>
+          </div>
+        )}
+
         {active === "design" && (
           <section
             className="mt-12 relative overflow-hidden rounded-3xl"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
+            <div className="pointer-events-none hidden md:block absolute inset-y-0 left-0 w-48 z-20">
+              <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-background/80 via-background/50 to-transparent" />
+            </div>
+            <div className="pointer-events-none hidden md:block absolute inset-y-0 right-0 w-48 z-20">
+              <div className="absolute inset-y-0 right-0 w-full bg-gradient-to-l from-background/80 via-background/50 to-transparent" />
+            </div>
             <button
               type="button"
               onClick={slidePrev}
               onMouseDown={() => setSpeed(40)}
               onMouseUp={() => setSpeed(80)}
-              className="absolute left-5 top-1/2 z-30 -translate-y-1/2 h-11 w-11 rounded-full glass grid place-items-center text-foreground transition hover:bg-white/10"
+              className="absolute left-5 top-1/2 z-30 -translate-y-1/2 h-11 w-11 rounded-full bg-slate-950 text-white shadow-none ring-0 md:glass grid place-items-center transition hover:bg-slate-900"
             >
               <ChevronLeft size={18} />
             </button>
@@ -256,7 +322,7 @@ export function Projects() {
               onClick={slideNext}
               onMouseDown={() => setSpeed(220)}
               onMouseUp={() => setSpeed(80)}
-              className="absolute right-5 top-1/2 z-30 -translate-y-1/2 h-11 w-11 rounded-full glass grid place-items-center text-foreground transition hover:bg-white/10"
+              className="absolute right-5 top-1/2 z-30 -translate-y-1/2 h-11 w-11 rounded-full bg-slate-950 text-white shadow-none ring-0 md:glass grid place-items-center transition hover:bg-slate-900"
             >
               <ChevronRight size={18} />
             </button>
@@ -269,21 +335,32 @@ export function Projects() {
                 {duplicatedGallery.map((item, index) => (
                   <article
                     key={`${item.title}-${index}`}
-                    className="glass-strong overflow-hidden rounded-3xl min-w-[320px] md:min-w-[360px]"
+                    className="glass-strong overflow-hidden rounded-3xl min-w-[420px] md:min-w-[520px] cursor-pointer"
                   >
-                    <div className="relative aspect-[16/10] overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-[900ms] hover:scale-105"
-                      />
+                      <div
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => {
+                          setSelectedImage(item.image);
+                          setLightboxOpen(true);
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            setSelectedImage(item.image);
+                            setLightboxOpen(true);
+                          }
+                        }}
+                        className="relative aspect-[16/10] overflow-hidden cursor-pointer"
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-[900ms] hover:scale-105 cursor-pointer"
+                        />
                       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
                     </div>
-                    <div className="p-6">
-                      <h3 className="font-display text-xl font-semibold">{item.title}</h3>
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.caption}</p>
-                    </div>
+                    {/* Title and caption removed — image fills the card */}
                   </article>
                 ))}
               </motion.div>

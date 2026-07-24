@@ -54,6 +54,17 @@ export function Resume() {
               </motion.li>
             ))}
           </ul>
+
+          <div className="mt-10 flex justify-center">
+            <MagneticButton
+              as="a"
+              href="/certificates.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Certifications
+            </MagneticButton>
+          </div>
         </div>
       </div>
     </section>

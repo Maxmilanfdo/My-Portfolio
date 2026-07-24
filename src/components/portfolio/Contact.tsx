@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { init, send } from "@emailjs/browser";
 import { Check, Mail, MapPin, Phone, Send } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 
@@ -15,12 +16,32 @@ export function Contact() {
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
 
-  const onSubmit = async (_data: FormData) => {
-    // Wire EmailJS here — using service/template IDs from env.
-    await new Promise((r) => setTimeout(r, 900));
-    setSent(true);
-    reset();
-    setTimeout(() => setSent(false), 3200);
+  const onSubmit = async (data: FormData) => {
+    try {
+      const userId = import.meta.env.VITE_EMAILJS_USER_ID;
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+
+      if (!userId || !serviceId || !templateId) {
+        throw new Error("EmailJS environment variables are not configured.");
+      }
+
+      init(userId);
+      await send(serviceId, templateId, {
+        from_name: data.name,
+        from_email: data.email,
+        subject: data.subject,
+        message: data.message,
+        reply_to: data.email,
+        to_email: "maxmilanfdo2003@gmail.com",
+      });
+      setSent(true);
+      reset();
+      setTimeout(() => setSent(false), 3200);
+    } catch (error) {
+      console.error("EmailJS send error:", error);
+      alert("Something went wrong sending your message. Please try again later.");
+    }
   };
 
   const info = [
@@ -115,8 +136,10 @@ export function Contact() {
             <motion.button
               type="submit"
               disabled={isSubmitting || sent}
-              whileTap={{ scale: 0.97 }}
-              className="mt-2 inline-flex items-center justify-center gap-2 self-start overflow-hidden rounded-full bg-gradient-to-r from-brand-secondary via-brand to-brand-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_40px_-14px_rgba(108,99,255,0.7)] transition-all disabled:opacity-70"
+              whileHover={{ y: -1, boxShadow: "0 20px 40px rgba(108,99,255,0.22)" }}
+              whileTap={{ scale: 0.92, y: 4 }}
+              transition={{ type: "spring", stiffness: 700, damping: 24 }}
+              className="mt-2 inline-flex items-center justify-center gap-2 self-start overflow-hidden rounded-full bg-gradient-to-r from-brand-secondary via-brand to-brand-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_40px_-14px_rgba(108,99,255,0.7)] transition-all duration-200 disabled:opacity-70"
             >
               {sent ? (
                 <>

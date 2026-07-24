@@ -15,12 +15,12 @@ import {
 } from 'react-icons/si';
 
 
-import { FiGithub, FiLinkedin, FiInstagram, FiTwitter, FiMail } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiInstagram, FiTwitter, FiMail, FiFacebook } from "react-icons/fi";
 
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
-import project4 from "@/assets/project-4.jpg";
+import project1 from "@/assets/project-1.png";
+import project2 from "@/assets/project-2.png";
+import project3 from "@/assets/project-3.png";
+import project4 from "@/assets/project-4.png";
 import { AfterEffectsIcon } from "@/constants/AfterEffectsIcon";
 import { PremiereProIcon } from "@/constants/PremiereProIcon";
 
@@ -38,6 +38,7 @@ export const socials = [
   { icon: FiGithub, href: "https://github.com/MaxmilanFdo", label: "GitHub" },
   { icon: FiLinkedin, href: "https://linkedin.com/in/maxmilanfdo", label: "LinkedIn" },
   { icon: FiInstagram, href: "https://instagram.com/maxmilan.exe", label: "Instagram" },
+  { icon: FiFacebook, href: "https://www.facebook.com/maxmilan.fernando.11", label: "Facebook" },
   { icon: FiTwitter, href: "https://x.com/MaxmilanFdo", label: "X" },
   { icon: FiMail, href: "mailto:maxmilanfdo2003@gmail.com", label: "Email" },
 ];
@@ -106,69 +107,55 @@ export const projects = [
     title: "A Complete Integrated CRM Product {Currently In Development}",
     description: "A comprehensive CRM solution that streamlines customer relationship management, sales tracking, and marketing automation for businesses.",
     category: "software" as ProjectCategory,
-    image: project4,
+    image: project1,
     tech: ["In Development"],
-    demo: "#",
-    repo: "#",
   },
 
   {
     title: "S.H.I.L.P.A (Smart Helper Intelligent Learning Personal Assistant)",
     description: "An AI-powered personal assistant that helps users manage tasks, schedule events, and answer questions using natural language processing.",
     category: "software" as ProjectCategory,
-    image: project1,
+    image: project2,
     tech: ["Flask", "Python", "AI/ML", "NLP", "API"],
-    demo: "#",
-    repo: "#",
+    repo: "https://github.com/Maxmilanfdo/My-Projects/tree/main/SHILPA%20-%20AI%20Assistant",
   },
   {
     title: "Air Canvas",
     description: "Built a real-time hand gesture drawing application using computer vision and machine learning techniques.",
     category: "software" as ProjectCategory,
-    image: project2,
+    image: project3,
     tech: ["OpenCV", "AI/ML", "MediaPipe", "Computer Vision"],
-    demo: "#",
-    repo: "#",
+    repo: "https://github.com/Maxmilanfdo/My-Projects/tree/main/Air%20Canvas",
   },
   {
     title: "Image Steganography",
     description: "Implemented a secure image steganography system that hides sensitive data within images using advanced encoding techniques.",
     category: "software" as ProjectCategory,
-    image: project3,
+    image: project4,
     tech: ["Python", "Cryptography", "Image Processing", "Steganography", "Data Security"],
-    demo: "#",
-    repo: "#",
+    repo: "https://github.com/Maxmilanfdo/My-Projects/tree/main/Image%20Steganography",
   },
 ];
 
 export type GalleryItem = {
   image: string;
-  title: string;
-  caption: string;
+  title: string; // internal identifier (filename) — not shown in UI
+  caption: string; // kept for compatibility but will be empty
 };
 
-export const designGallery: GalleryItem[] = [
-  {
-    image: project3,
-    title: "Fintech Brand Campaign",
-    caption: "Visual identity and promotional imagery for a brand launch.",
-  },
-  {
-    image: project4,
-    title: "Motion Marketing Visual",
-    caption: "A polished hero shot for motion and social campaigns.",
-  },
-  {
-    image: project1,
-    title: "Product UI Exploration",
-    caption: "High-fidelity screen designs for a modern SaaS dashboard.",
-  },
-  {
-    image: project2,
-    title: "Concept Photography Layout",
-    caption: "Photo-led layout system for digital and print collateral.",
-  },
-];
+// Auto-import all images from the assets/designs folder so authors can
+// drop files there without updating code. Keep title/caption empty so
+// the UI shows only images.
+const designModules = import.meta.glob('@/assets/designs/*.{jpg,jpeg,png,webp}', { eager: true }) as Record<string, any>;
+
+export const designGallery: GalleryItem[] = Object.entries(designModules)
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
+  .map(([path, mod]) => {
+    const parts = path.split('/');
+    const filename = parts[parts.length - 1];
+    const src = (mod && (mod.default ?? mod)) as string;
+    return { image: src, title: filename, caption: '' };
+  });
 
 export type VideoShowcaseItem = {
   href: string;
