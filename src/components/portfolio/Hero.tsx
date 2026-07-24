@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Download } from "lucide-react";
 import profileImg from "@/assets/profile.png";
-import { orbitTech, roles, socials } from "@/constants/portfolio";
+import { roles, socials, skillGroups } from "@/constants/portfolio";
 import { MagneticButton } from "./MagneticButton";
 
 function Typewriter() {
@@ -72,32 +72,35 @@ function ProfileCard() {
       </svg>
       <div className="absolute inset-12 rounded-full bg-brand/20 blur-3xl" />
 
-      {/* Floating tech badges orbiting */}
-      {orbitTech.map((t, idx) => {
-        const angle = (idx / orbitTech.length) * Math.PI * 2;
-        const radius = 46;
-        const left = 50 + Math.cos(angle) * radius;
-        const top = 50 + Math.sin(angle) * radius;
-        const Icon = t.icon;
-        return (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
-            transition={{
-              opacity: { delay: 0.3 + idx * 0.05 },
-              scale: { delay: 0.3 + idx * 0.05 },
-              y: { duration: 3 + idx * 0.2, repeat: Infinity, ease: "easeInOut" },
-            }}
-            style={{ left: `${left}%`, top: `${top}%` }}
-            className="absolute -translate-x-1/2 -translate-y-1/2"
-          >
-            <div className="glass-strong grid h-11 w-11 place-items-center rounded-2xl shadow-lg">
-              <Icon size={20} color={t.color} />
-            </div>
-          </motion.div>
-        );
-      })}
+      {/* Floating tech badges orbiting (use icons from Skills section) */}
+      {(() => {
+        const flat = skillGroups.flatMap((g) => g.items);
+        return flat.map((t, idx) => {
+          const angle = (idx / flat.length) * Math.PI * 2;
+          const radius = 46;
+          const left = 50 + Math.cos(angle) * radius;
+          const top = 50 + Math.sin(angle) * radius;
+          const Icon = t.icon as any;
+          return (
+            <motion.div
+              key={`${t.name}-${idx}`}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
+              transition={{
+                opacity: { delay: 0.3 + idx * 0.03 },
+                scale: { delay: 0.3 + idx * 0.03 },
+                y: { duration: 3 + idx * 0.12, repeat: Infinity, ease: "easeInOut" },
+              }}
+              style={{ left: `${left}%`, top: `${top}%` }}
+              className="absolute -translate-x-1/2 -translate-y-1/2"
+            >
+              <div className="glass-strong grid h-11 w-11 place-items-center rounded-2xl shadow-lg">
+                <Icon size={18} className="text-muted-foreground" />
+              </div>
+            </motion.div>
+          );
+        });
+      })()}
 
       {/* Profile card */}
       <div
