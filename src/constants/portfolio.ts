@@ -56,8 +56,8 @@ export const orbitTech = [
 
 export const stats = [
   { value: 6, suffix: "+", label: "Years Experience" },
-  { value: 50, suffix: "+", label: "Videos Edited" },
-  { value: 100, suffix: "+", label: "Designs Delivered" },
+  { value: 80, suffix: "+", label: "Videos Edited" },
+  { value: 150, suffix: "+", label: "Designs Delivered" },
   { value: 20, suffix: "+", label: "Technologies" },
   
 ];
