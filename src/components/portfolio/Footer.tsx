@@ -7,11 +7,10 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-3">
           <div>
             <a href="#home" className="inline-block">
-              <span className="font-display text-sm font-semibold">alex.rivera</span>
+              <span className="font-display text-sm font-semibold">Maxmilan Fernando</span>
             </a>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              Building considered digital products at the intersection of
-              engineering and design.
+              A passionate developer and creative professional who transforms ideas into functional, visually appealing, and result-driven digital solutions.
             </p>
           </div>
           <div>
@@ -49,8 +48,8 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 text-xs text-muted-foreground sm:flex-row">
-          <div>© {new Date().getFullYear()} Alex Rivera. Crafted with care.</div>
-          <div>Designed & built in Copenhagen.</div>
+          <div>© {new Date().getFullYear()} Maxmilan Fernando.</div>
+          <div>Crafted with care.</div>
         </div>
       </div>
     </footer>

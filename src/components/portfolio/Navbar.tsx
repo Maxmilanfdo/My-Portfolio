@@ -45,7 +45,7 @@ export function Navbar() {
         <nav className="glass-strong flex items-center justify-between rounded-full px-3 py-2 shadow-[0_10px_40px_-10px_rgba(108,99,255,0.35)]">
           <a href="#home" className="pl-3">
             <span className="font-display text-sm font-semibold tracking-tight">
-              alex.rivera
+              Maxmilan Fernando
             </span>
           </a>
           <ul className="hidden items-center gap-1 md:flex">

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Download } from "lucide-react";
-import profileImg from "@/assets/profile.jpg";
+import profileImg from "@/assets/profile.png";
 import { orbitTech, roles, socials } from "@/constants/portfolio";
 import { MagneticButton } from "./MagneticButton";
 
@@ -109,7 +109,7 @@ function ProfileCard() {
         <div className="glass-strong h-full w-full overflow-hidden rounded-[36%] p-2 shadow-[0_30px_80px_-30px_rgba(108,99,255,0.6)]">
           <img
             src={profileImg}
-            alt="Alex Rivera portrait"
+            alt="maxmilan portrait"
             width={768}
             height={768}
             className="h-full w-full rounded-[32%] object-cover"
@@ -135,7 +135,7 @@ export function Hero() {
               <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/70" />
               <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
             </span>
-            Available for select projects — Q3 2026
+            Available for full time opportunities and freelance work
           </motion.div>
 
           <motion.p
@@ -152,7 +152,7 @@ export function Hero() {
             transition={{ delay: 0.15, duration: 0.7 }}
             className="mt-2 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
           >
-            Alex Rivera
+            Maxmilan Fernando
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -168,9 +168,9 @@ export function Hero() {
             transition={{ delay: 0.35, duration: 0.6 }}
             className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground"
           >
-            I design and build premium digital products — from crisp interfaces
-            to resilient full-stack systems. Currently crafting tools that feel
-            fast, considered, and quietly delightful.
+            I'm a passionate developer and creative professional,
+            transforming ideas into functional
+            visually appealing, and result-driven digital solutions.
           </motion.p>
 
           <motion.div

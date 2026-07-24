@@ -33,8 +33,8 @@ export function About() {
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="About"
-          title="Six years of shipping software that people actually want to use."
-          description="I blend engineering rigor with a designer's eye — obsessing over the small moments that make a product feel considered."
+          title="Driven by Curiosity, Powered by Technology."
+          description="Discover the passion, creativity, and technology that drive every project I build."
         />
 
         <div className="mt-16 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
@@ -46,14 +46,10 @@ export function About() {
           >
             <div className="absolute -top-24 -right-16 h-72 w-72 rounded-full bg-brand/25 blur-3xl" />
             <p className="relative text-lg leading-relaxed text-muted-foreground">
-              I'm a product engineer based between Copenhagen and remote. I've
-              spent the last six years shipping web products — from tiny brand
-              sites to enterprise platforms with millions of monthly sessions.
+              <span className="text-foreground">Technology isn't just my profession—it's my passion.</span> I transform ideas into modern digital experiences through web development, creative design, video editing, and digital marketing. By blending technical expertise with creativity, I create solutions that are functional, intuitive, and visually engaging.
             </p>
             <p className="relative mt-4 text-lg leading-relaxed text-muted-foreground">
-              My work sits at the intersection of typography, motion, and
-              systems thinking. I care about performance, accessibility, and
-              the details that separate <span className="text-foreground">fine</span> from <span className="text-foreground">unforgettable</span>.
+              Every project is an opportunity to solve problems, learn, and innovate. Whether it's building responsive websites, designing compelling visuals, or helping brands grow online, my goal is to create meaningful experiences that deliver real value.
             </p>
             <div className="relative mt-8 grid grid-cols-2 gap-4">
               {stats.map((s) => (
@@ -77,9 +73,9 @@ export function About() {
             className="space-y-4"
           >
             {[
-              { year: "2023", title: "Senior Product Engineer", org: "Lattice Studio" },
-              { year: "2021", title: "Full Stack Developer", org: "Northwind Labs" },
-              { year: "2019", title: "Freelance Interface Designer", org: "Independent" },
+              { year: "2025-2026", title: "Digital Marketing Specialist", org: "RS Caterers" },
+              { year: "2023", title: "Data Analyst Intern", org: "Saint Louis University (Powered by Excelerate)" },
+              { year: "2020-2024", title: "Graphic Designer", org: "My College" },
             ].map((e, idx) => (
               <motion.div
                 key={idx}

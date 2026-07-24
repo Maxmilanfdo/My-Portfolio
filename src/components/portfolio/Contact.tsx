@@ -24,9 +24,9 @@ export function Contact() {
   };
 
   const info = [
-    { icon: MapPin, label: "Location", value: "Copenhagen · Remote" },
-    { icon: Mail, label: "Email", value: "hello@alexrivera.dev" },
-    { icon: Phone, label: "Phone", value: "+45 22 44 66 88" },
+    { icon: MapPin, label: "Location", value: "Chennai · Remote" },
+    { icon: Mail, label: "Email", value: "maxmilanfdo2003@gmail.com" },
+    { icon: Phone, label: "Phone", value: "(+91) 8903139019" },
   ];
 
   return (
