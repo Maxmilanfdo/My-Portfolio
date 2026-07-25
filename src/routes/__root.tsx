@@ -84,11 +84,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Portfolio of Maxmilan Fernando — Building innovative digital experiences through creativity and technology." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: "/og-image.jpg", },
+      { property: "og:url", content: "https://www.maxmilanfernando.com/" },
+      { property: "og:image", content: "https://www.maxmilanfernando.com/og-image.jpg" },
+      { property: "og:image:secure_url", content: "https://www.maxmilanfernando.com/og-image.jpg" },
       { property: "og:image:width", content: "1200", },
       { property: "og:image:height", content: "630", },
-      { property: "og:image:type", content: "image/jpg", },
-      { name: "twitter:image", content: "/og-image.jpg", },
+      { property: "og:image:type", content: "image/jpeg", },
+      { name: "twitter:image", content: "https://www.maxmilanfernando.com/og-image.jpg", },
     ],
     links: [
       {
