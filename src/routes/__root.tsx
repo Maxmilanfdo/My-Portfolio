@@ -77,13 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Maxmilan Fernando — Developer & Designer" },
-      { name: "description", content: "Portfolio of Maxmilan Fernando — a full stack developer and interface designer building elegant, high-performance products." },
+      { title: "Maxmilan Fernando — Developer. Designer. Editor" },
+      { name: "description", content: "Portfolio of Maxmilan Fernando — Building innovative digital experiences through creativity and technology." },
       { name: "author", content: "Maxmilan Fernando" },
-      { property: "og:title", content: "Maxmilan Fernando — Full Stack Developer & Designer" },
-      { property: "og:description", content: "Portfolio of Maxmilan Fernando — building elegant, high-performance products." },
+      { property: "og:title", content: "Maxmilan Fernando — Developer. Designer. Editor" },
+      { property: "og:description", content: "Portfolio of Maxmilan Fernando — Building innovative digital experiences through creativity and technology." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: "/og-image.png", },
+      { property: "og:image:width", content: "1200", },
+      { property: "og:image:height", content: "630", },
+      { property: "og:image:type", content: "image/png", },
+      { name: "twitter:image", content: "/og-image.png", },
     ],
     links: [
       {
