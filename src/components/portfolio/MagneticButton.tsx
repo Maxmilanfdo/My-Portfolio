@@ -1,14 +1,25 @@
 import { motion } from "framer-motion";
 import { useRef, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ReactNode } from "react";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, AnchorHTMLAttributes<HTMLAnchorElement> {
+type ButtonProps = {
+  as?: "button";
+  href?: never;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
+
+type AnchorProps = {
+  as: "a";
+  href: string;
+} & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">;
+
+interface MagneticButtonBaseProps {
   children: ReactNode;
   variant?: "primary" | "ghost";
-  as?: "button" | "a";
-  href?: string;
 }
 
-export function MagneticButton({ children, variant = "primary", as = "button", href, ...rest }: Props) {
+type Props = MagneticButtonBaseProps & (ButtonProps | AnchorProps);
+
+export function MagneticButton(props: Props) {
+  const { children, variant = "primary" } = props;
   const ref = useRef<HTMLDivElement>(null);
 
   const handleMove = (e: React.MouseEvent) => {
@@ -39,13 +50,15 @@ export function MagneticButton({ children, variant = "primary", as = "button", h
     </motion.div>
   );
 
-  if (as === "a") {
+  if (props.as === "a") {
+    const { href, as, ...rest } = props as AnchorProps;
     return (
       <a href={href} className="inline-block" {...rest}>
         {inner}
       </a>
     );
   }
+  const { as, ...rest } = props as ButtonProps;
   return (
     <button {...rest} className="inline-block">
       {inner}

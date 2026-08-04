@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Github, Youtube, Instagram, X } from "lucide-react";
 import { projects, designGallery, videoShowcase, getVideoThumbnail, type ProjectCategory } from "@/constants/portfolio";
 import { SectionHeader } from "./SectionHeader";
-import projectFallback from "@/assets/project-4.png";
+import projectFallback from "@/assets/project-4.webp";
 
 const tabs: { id: ProjectCategory; label: string }[] = [
   { id: "software", label: "Software" },

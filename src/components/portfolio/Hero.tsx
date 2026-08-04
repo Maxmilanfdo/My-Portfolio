@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Download } from "lucide-react";
-import profileImg from "@/assets/profile.png";
+import profileImg from "@/assets/profile.webp";
 import { roles, socials, skillGroups } from "@/constants/portfolio";
 import { MagneticButton } from "./MagneticButton";
 
