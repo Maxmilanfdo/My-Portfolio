@@ -241,6 +241,7 @@ export function Projects() {
                       src={p.image}
                       alt={p.title}
                       loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
@@ -291,7 +292,7 @@ export function Projects() {
               >
                 <X size={16} />
               </button>
-              <img src={selectedImage} alt="Full size" className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl" />
+              <img src={selectedImage} alt="Full size" loading="lazy" decoding="async" className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl" />
             </div>
           </div>
         )}
@@ -356,6 +357,7 @@ export function Projects() {
                           src={item.image}
                           alt={item.title}
                           loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover transition-transform duration-[900ms] hover:scale-105 cursor-pointer"
                         />
                       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
@@ -391,6 +393,7 @@ export function Projects() {
                       src={meta.thumbnail}
                       alt={label}
                       loading="lazy"
+                      decoding="async"
                       onError={(event) => {
                         event.currentTarget.src = projectFallback;
                       }}

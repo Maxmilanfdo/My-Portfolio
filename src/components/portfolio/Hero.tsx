@@ -115,6 +115,9 @@ function ProfileCard() {
             alt="maxmilan portrait"
             width={768}
             height={768}
+            loading="lazy"
+            decoding="async"
+            fetchpriority="high"
             className="h-full w-full rounded-[32%] object-cover"
           />
         </div>
