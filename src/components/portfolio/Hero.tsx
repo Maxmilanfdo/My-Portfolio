@@ -117,7 +117,7 @@ function ProfileCard() {
             height={768}
             loading="lazy"
             decoding="async"
-            fetchpriority="high"
+            fetchPriority="high"
             className="h-full w-full rounded-[32%] object-cover"
           />
         </div>
@@ -141,7 +141,7 @@ export function Hero() {
               <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/70" />
               <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
             </span>
-            Available for full time opportunities and freelance work
+            Available for full time & freelance opportunities
           </motion.div>
 
           <motion.p
@@ -156,9 +156,10 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.7 }}
-            className="mt-2 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
+            className="mt-2 inline-block font-display text-4xl font-semibold leading-[1.20] tracking-tight sm:text-5xl md:text-6xl"
           >
-            Maxmilan Fernando
+            <span className="block">Maxmilan Selvan</span>
+            <span className="block">Fernando</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

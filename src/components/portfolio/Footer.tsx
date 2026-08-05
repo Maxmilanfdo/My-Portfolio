@@ -7,7 +7,7 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-3">
           <div>
             <a href="#home" className="inline-block">
-              <span className="font-display text-sm font-semibold">Maxmilan Fernando</span>
+              <span className="font-display text-sm font-semibold">Maxmilan Selvan Fernando</span>
             </a>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
               A passionate developer and creative professional who transforms ideas into functional, visually appealing, and result-driven digital solutions.

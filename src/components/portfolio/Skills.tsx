@@ -8,8 +8,8 @@ export function Skills() {
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Skills"
-          title="A carefully curated toolkit."
-          description="I lean on tools that let me move quickly without sacrificing craft. These are the ones I reach for daily."
+          title="My Skill Set"
+          description="The technologies, frameworks, and creative tools I use to build, design, and bring ideas to life."
         />
 
         <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -28,17 +28,27 @@ export function Skills() {
                   0{gi + 1}
                 </div>
                 <h3 className="mt-2 font-display text-xl font-semibold">{group.title}</h3>
-                <ul className="mt-6 space-y-2">
+                <ul className="mt-6 space-y-3">
                   {group.items.map((it) => {
                     const Icon = it.icon;
                     return (
                       <motion.li
                         key={it.name}
                         whileHover={{ x: 4 }}
-                        className="flex items-center gap-3 rounded-xl bg-white/5 px-3 py-2 text-sm transition-colors hover:bg-white/10"
+                        className="relative overflow-hidden rounded-xl bg-white/5 px-3 py-2 text-sm transition-colors hover:bg-white/10"
                       >
-                        <Icon size={16} className="text-muted-foreground" />
-                        <span>{it.name}</span>
+                        <motion.div
+                          className="absolute inset-0 origin-left rounded-xl bg-gradient-to-r from-brand/35 to-brand-secondary/50"
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: it.progress / 100 }}
+                          viewport={{ once: true, amount: 0.6 }}
+                          transition={{ duration: 0.9, ease: "easeOut" }}
+                          style={{ transformOrigin: "left center" }}
+                        />
+                        <div className="relative z-10 flex items-center gap-3">
+                          <Icon size={16} className="text-muted-foreground" />
+                          <span>{it.name}</span>
+                        </div>
                       </motion.li>
                     );
                   })}

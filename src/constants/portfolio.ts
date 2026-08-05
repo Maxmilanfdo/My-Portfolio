@@ -66,36 +66,36 @@ export const skillGroups = [
   {
     title: "Frontend",
     items: [
-      { name: "HTML", icon: SiHtml5 },
-      { name: "CSS", icon: SiCss },
-      { name: "JavaScript", icon: SiJavascript },
-      { name: "Tailwind", icon: SiTailwindcss },
-      { name: "React", icon: SiReact },
+      { name: "HTML", icon: SiHtml5, progress: 93 },
+      { name: "CSS", icon: SiCss, progress: 91 },
+      { name: "JavaScript", icon: SiJavascript, progress: 89 },
+      { name: "Tailwind", icon: SiTailwindcss, progress: 58},
+      { name: "React", icon: SiReact, progress: 55 },
     ],
   },
   {
     title: "Backend",
-    items: [
-      { name: "Node.js", icon: SiNodedotjs },
-      { name: "Python", icon: SiPython },
-      { name: "C/C++", icon: SiCplusplus },
+    items: [ 
+      { name: "Python", icon: SiPython, progress: 80 },
+      { name: "C/C++", icon: SiCplusplus, progress: 75 },
+      { name: "Node.js", icon: SiNodedotjs, progress: 48 },
     ],
   },
   {
     title: "Database",
     items: [
-      { name: "MySQL", icon: SiMysql },
-      { name: "MongoDB", icon: SiMongodb },
+      { name: "MySQL", icon: SiMysql, progress: 65 },
+      { name: "MongoDB", icon: SiMongodb, progress: 50 },
     ],
   },
   {
     title: "Tools & Design",
     items: [
-      { name: "Photoshop", icon: DiPhotoshop },
-      { name: "Illustrator", icon: DiIllustrator },
-      { name: "After Effects", icon: AfterEffectsIcon },
-      { name: "Premiere Pro", icon: PremiereProIcon },
-      { name: "Filmora", icon: SiWondersharefilmora },
+      { name: "Photoshop", icon: DiPhotoshop, progress: 95 },
+      { name: "Illustrator", icon: DiIllustrator, progress: 90 },
+      { name: "After Effects", icon: AfterEffectsIcon, progress: 80 },
+      { name: "Premiere Pro", icon: PremiereProIcon, progress: 88 },
+      { name: "Filmora", icon: SiWondersharefilmora, progress: 88 },
     ],
   },
 ];

@@ -195,9 +195,9 @@ export function Projects() {
     <section id="projects" className="relative py-20">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
-          eyebrow="Selected Work"
-          title="Projects I'm proud of."
-          description="A slice of recent product, brand, and motion work. Every project is a collaboration — credits available on request."
+          eyebrow="My Projects"
+          title="Things I've Built"
+          description="A showcase of projects, designs, and creative work driven by technology, creativity, and problem-solving."
         />
 
         <div className="mt-10 flex justify-center">
@@ -360,12 +360,14 @@ export function Projects() {
                           decoding="async"
                           className="h-full w-full object-cover transition-transform duration-[900ms] hover:scale-105 cursor-pointer"
                         />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
                     </div>
                     {/* Title and caption removed — image fills the card */}
                   </article>
                 ))}
               </motion.div>
+              <p className="mt-5 text-center text-xs text-muted-foreground/75">
+                Click the image for full view
+              </p>
             </div>
           </section>
         )}
