@@ -77,12 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Maxmilan Fernando — Developer. Designer. Editor" },
-      { name: "description", content: "Portfolio of Maxmilan Fernando — Building innovative digital experiences through creativity and technology." },
-      { name: "author", content: "Maxmilan Fernando" },
-      { property: "og:title", content: "Maxmilan Fernando — Developer. Designer. Editor" },
-      { property: "og:description", content: "Portfolio of Maxmilan Fernando — Building innovative digital experiences through creativity and technology." },
+      { title: "Portfolio - Maxmilan Selvan Fernando" },
+      { name: "description", content: "Portfolio of Maxmilan Selvan Fernando — Building innovative digital experiences through creativity and technology." },
+      { name: "author", content: "Maxmilan Selvan Fernando" },
+      { property: "og:title", content: "Maxmilan Selvan Fernando — Developer. Designer. Editor" },
+      { property: "og:description", content: "Portfolio of Maxmilan Selvan Fernando — Building innovative digital experiences through creativity and technology." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Portfolio · Maxmilan Selvan Fernando " },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:url", content: "https://www.maxmilanfernando.com/" },
       { property: "og:image", content: "https://www.maxmilanfernando.com/og-image.jpg" },
@@ -122,6 +123,18 @@ function RootShell({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-82PFCCKPTP');`,
           }}
+        />
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Portfolio · Maxmilan Selvan Fernando",
+                alternateName: "Maxmilan Selvan Fernando",
+                url: "https://www.maxmilanfernando.com/",
+              }),
+            }}
         />
       </head>
       <body>

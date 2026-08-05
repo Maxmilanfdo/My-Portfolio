@@ -78,7 +78,7 @@ function Slideshow({ images }: { images: string[] }) {
 export function About() {
   const subsections = [
     {
-      title: "Publication",
+      title: "Conference & Publication",
       description: (
         <div className="space-y-3">
           <p>Presented my project <b>S.H.I.L.P.A. (Smart Helper Intelligent Learning Personal Assistant)</b> at the <b>International Conference on Recent Trends in Computing and Communication Engineering (ICRTCCE-2024)</b>, held at <b>SIMATS School of Engineering, Chennai, Tamil Nadu</b>, and published the research in <b>TIJER (Technix International Journal of Engineering Research).</b></p>
